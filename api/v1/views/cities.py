@@ -11,7 +11,7 @@ Creamos la vista para el modelo cities con ayuda de flask !
 """
 
 
-@app_views("/cities/<city_id>", methods=["GET"])
+@app_views.route("/cities/<city_id>", methods=["GET"])
 def get_cities(id):
     """
     id : será el id correspondiente a cada ciudad
