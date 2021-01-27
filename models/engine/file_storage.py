@@ -82,5 +82,9 @@ class FileStorage:
         """
         this function returns the number of objects of the same class.
         """
-        num_objs = len(self.all(cls))
+        num_objs = 0
+        if cls is not None and cls.__name__ in classes:
+            num_objs = len(self.all(cls))
+        elif cls is None:
+            num_objs = len(self.__objects)
         return num_objs

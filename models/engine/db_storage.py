@@ -88,5 +88,10 @@ class DBStorage:
         """
         this function returns the number of objects of the same class.
         """
-        num_objs = len(self.all(cls))
+        num_objs = 0
+        if cls is not None and cls.__name__ in classes:
+            num_objs = self.__session.query(cls).count()
+        elif cls is None:
+            for clases in classes.values():
+                num_objs += self.__session.query(clases).count()
         return num_objs
