@@ -13,12 +13,14 @@ classes = {
     "users": "User"
 }
 
+
 @app_views.route("/status", methods=["GET"])
 def index():
     """
     esta vista retorna el estado de la api
     """
     return jsonify({'status': 'OK'})
+
 
 @app_views.route('/stats', strict_slashes=False)
 def stats():
