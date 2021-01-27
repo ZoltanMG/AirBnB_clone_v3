@@ -1,33 +1,25 @@
 #!/usr/bin/python3
+''' API start '''
 
-"""
-importamos los modulos necesarios
-"""
-
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify, render_template, make_response
 from models import storage
 from api.v1.views import app_views
-import os
+from os import environ
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
 
 
-@app.errorhandler(404)
-def error_handler(e):
-    """
-    Manejamos el error 404
-    de pagina no encontrada
-    con make response para asiganar el
-    http header error 404
-    """
-    return make_response(jsonify({"error": "Not found"}), 404)
-
-
 @app.teardown_appcontext
-def teardown_db(exception):
-    """closes the storage on teardown"""
+def close(error):
+    ''' close storage '''
     storage.close()
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    ''' page not found '''
+    return make_response(jsonify({'error': "Not found"}), 404)
 
 
 if __name__ == '__main__':
