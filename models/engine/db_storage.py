@@ -79,6 +79,8 @@ class DBStorage:
         """
         this function returns a specific object.
         """
+        if type(cls) == str and cls in classes:
+            cls = classes[cls]
         get_obj = "{}.{}".format(cls.__name__, id)
         if get_obj in self.all():
             return self.all()[get_obj]
@@ -89,6 +91,9 @@ class DBStorage:
         this function returns the number of objects of the same class.
         """
         num_objs = 0
+        print("-----> {}".format(cls))
+        if type(cls) == str and cls in classes:
+            cls = classes[cls]
         if cls is not None and cls.__name__ in classes:
             num_objs = self.__session.query(cls).count()
         elif cls is None:
