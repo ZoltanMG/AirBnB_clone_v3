@@ -14,4 +14,4 @@ def index():
     """
     esta vista retorna el estado de la api
     """
-    return jsonify({'status': 'OK'})
+    return jsonify(status="OK")
