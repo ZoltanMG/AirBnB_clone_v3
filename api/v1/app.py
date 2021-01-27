@@ -4,7 +4,7 @@
 importamos los modulos necesarios
 """
 
-from flask import Flask
+from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 import os
@@ -20,6 +20,14 @@ aplicación para que esta añada sus rutas a una ruta base,
 que en este caso, no está declarada. Esto hará que se registren en "/"
 """
 app.register_blueprint(app_views)
+
+@app.errorhandler(404)
+def error_handler(e):
+    """
+    Manejamos el error 404
+    de pagina no encontrada
+    """
+    return jsonify({"error": "Not found"})
 
 
 @app.teardown_appcontext
