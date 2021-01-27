@@ -46,7 +46,7 @@ if __name__ == "__main__":
         host = "0.0.0.0"
     port = os.environ.get('HBNB_API_PORT')
     if port is None:
-        port = 5000
+        port = "5000"
     """
     agregamos este ultimo parametro para que flask
     pueda manejar multiples solicitudes al tiempo
