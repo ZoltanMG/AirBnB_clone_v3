@@ -4,7 +4,7 @@
 importamos los modulos necesarios
 """
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, make_response
 from models import storage
 from api.v1.views import app_views
 import os
@@ -21,13 +21,16 @@ que en este caso, no está declarada. Esto hará que se registren en "/"
 """
 app.register_blueprint(app_views)
 
+
 @app.errorhandler(404)
 def error_handler(e):
     """
     Manejamos el error 404
     de pagina no encontrada
+    con make response para asiganar el
+    http header error 404
     """
-    return jsonify({"error": "Not found"})
+    return make_response(jsonify({"error": "Not found"}), 404)
 
 
 @app.teardown_appcontext
