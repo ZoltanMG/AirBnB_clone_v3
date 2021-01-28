@@ -43,7 +43,8 @@ def update_city_id(city_id):
     return jsonify(objeto.to_dict())
 
 
-@app_views.route('/states/<state_id>/cities', strict_slashes=False, methods=['GET'])
+@app_views.route('/states/<state_id>/cities',
+                 strict_slashes=False, methods=['GET'])
 def state_city(state_id):
     ''' listar estados a partir de su id '''
     objeto = storage.get(State, state_id)
