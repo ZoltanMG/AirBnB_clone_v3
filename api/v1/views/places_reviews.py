@@ -5,7 +5,7 @@ from flask import jsonify, abort, request, make_response
 from models import storage
 from models.review import Review
 from models.place import Place
-
+from models.user import User
 
 @app_views.route('/places/<place_id>/reviews',
                  strict_slashes=False, methods=['GET'])
@@ -60,7 +60,7 @@ def route_review_post(place_id):
         return make_response(jsonify({'error': 'Missing text'}), 400)
     review = Review(**req)
     setattr(review, 'place_id', id)
-    review.save()
+    storage.save()
     return make_response(jsonify(review.to_dict()), 201)
 
 
