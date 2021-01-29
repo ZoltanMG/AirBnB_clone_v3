@@ -59,7 +59,7 @@ def amenity_post():
 def update_amenity_id(amenity_id):
     ''' actualiza u user a partir de su pwd '''
     dic = request.get_json()
-    amenity = storage.get(Amenity, user_id)
+    amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
     if not dic:
