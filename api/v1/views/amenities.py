@@ -64,8 +64,8 @@ def update_amenity_id(amenity_id):
         abort(404)
     if not dic:
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
-    for key in dic.keys():
-        if key not in ["id", "email", "created_at", "updated_at"]:
-            setattr(amenity, key, dic[key])
+    for key, value in request.get_json().items():
+        if key not in ['id', 'created_at', 'updated_at']:
+            setattr(amenity, key, value)
     amenity.save()
     return jsonify(amenity.to_dict())
