@@ -7,6 +7,7 @@ from models.review import Review
 from models.place import Place
 from models.user import User
 
+
 @app_views.route('/places/<place_id>/reviews',
                  strict_slashes=False, methods=['GET'])
 def route_state_review(place_id):
@@ -58,8 +59,9 @@ def route_review_post(place_id):
         abort(404)
     if 'text' not in req:
         return make_response(jsonify({'error': 'Missing text'}), 400)
+    req["place_id"] = place_id
     review = Review(**req)
-    setattr(review, 'place_id', id)
+#    setattr(review, 'place_id', id)
     storage.save()
     return make_response(jsonify(review.to_dict()), 201)
 
