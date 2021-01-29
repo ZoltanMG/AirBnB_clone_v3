@@ -15,8 +15,9 @@ def route_state_review(place_id):
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
-    reviews = [obj.to_dict() for obj in
-               place.reviews if obj.place_id == id]
+    reviews = [obj.to_dict() for obj in place.reviews]
+#    print("-----> {}".format(place.reviews))
+#               place.reviews if obj.place_id == id]
     return jsonify(reviews)
 
 
@@ -45,6 +46,7 @@ def route_review_delete(review_id):
                  strict_slashes=False, methods=['POST'])
 def route_review_post(place_id):
     ''' post object '''
+    prueba = storage.all(Review)#
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
@@ -53,7 +55,7 @@ def route_review_post(place_id):
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
     if 'user_id' not in req:
         return make_response(jsonify({'error': 'Missing user_id'}), 400)
-    print(req)
+#    print(req)
     user = storage.get(User, req['user_id'])
     if user is None:
         abort(404)
@@ -63,6 +65,7 @@ def route_review_post(place_id):
     review = Review(**req)
 #    setattr(review, 'place_id', id)
     storage.save()
+    print("-----> {}".format(prueba))
     return make_response(jsonify(review.to_dict()), 201)
 
 
