@@ -60,8 +60,9 @@ class Place(BaseModel, Base):
             """getter attribute returns the list of Review instances"""
             from models.review import Review
             review_list = []
-            all_reviews = models.storage.all(Review)
+            all_reviews = models.storage.all("Review")#Review)
             for review in all_reviews.values():
+#                print("----> {}".format(review))
                 if review.place_id == self.id:
                     review_list.append(review)
             return review_list
